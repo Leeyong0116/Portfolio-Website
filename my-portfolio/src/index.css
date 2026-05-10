@@ -49,33 +49,33 @@
 }
 
 :root {
-    --background: oklch(0.035 0.004 248);
+    --background: oklch(0.018 0.002 250);
     --foreground: oklch(0.985 0 0);
-    --card: oklch(0.105 0.006 248);
+    --card: oklch(0.055 0.004 250);
     --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.105 0.006 248);
+    --popover: oklch(0.055 0.004 250);
     --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.78 0.18 205);
-    --primary-foreground: oklch(0.06 0.01 220);
-    --secondary: oklch(0.16 0.01 248);
+    --primary: oklch(0.64 0.25 27);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.105 0.008 250);
     --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.155 0.008 248);
-    --muted-foreground: oklch(0.72 0.012 248);
-    --accent: oklch(0.2 0.04 185);
+    --muted: oklch(0.12 0.006 250);
+    --muted-foreground: oklch(0.68 0.02 255);
+    --accent: oklch(0.2 0.06 27);
     --accent-foreground: oklch(0.985 0 0);
     --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 14%);
+    --border: oklch(1 0 0 / 12%);
     --input: oklch(1 0 0 / 18%);
-    --ring: oklch(0.78 0.18 205);
-    --chart-1: oklch(0.78 0.18 205);
-    --chart-2: oklch(0.77 0.14 155);
+    --ring: oklch(0.64 0.25 27);
+    --chart-1: oklch(0.64 0.25 27);
+    --chart-2: oklch(0.82 0 0);
     --chart-3: oklch(0.84 0.15 82);
     --chart-4: oklch(0.72 0.15 28);
     --chart-5: oklch(0.7 0.12 285);
     --radius: 0.5rem;
     --sidebar: oklch(0.1 0 0);
     --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.78 0.16 205);
+    --sidebar-primary: oklch(0.64 0.25 27);
     --sidebar-primary-foreground: oklch(0.08 0 0);
     --sidebar-accent: oklch(0.18 0 0);
     --sidebar-accent-foreground: oklch(0.985 0 0);
@@ -124,9 +124,8 @@
   body {
     @apply min-h-screen bg-background text-foreground antialiased;
     background:
-      radial-gradient(circle at 16% 10%, oklch(0.23 0.1 205 / 22%), transparent 28rem),
-      radial-gradient(circle at 84% 18%, oklch(0.24 0.08 155 / 16%), transparent 30rem),
-      linear-gradient(180deg, oklch(0.045 0.006 248), oklch(0.025 0.004 248));
+      radial-gradient(circle at 78% 4%, oklch(0.28 0.14 27 / 18%), transparent 26rem),
+      linear-gradient(180deg, oklch(0.026 0.002 250), oklch(0.012 0.001 250));
     }
   html {
     @apply scroll-smooth font-sans;
@@ -141,22 +140,176 @@
 }
 
 @layer components {
+  .nav-link {
+    position: relative;
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: color 180ms ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.45rem;
+    height: 2px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 240ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--foreground);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .mobile-nav-link {
+    position: relative;
+    display: block;
+    border: 1px solid var(--border);
+    padding: 0.9rem 1rem;
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      color 180ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .mobile-nav-link:hover {
+    border-color: color-mix(in oklch, var(--primary) 70%, transparent);
+    background: var(--secondary);
+    color: var(--foreground);
+  }
+
+  .btn-red {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    box-shadow: 0 0 28px oklch(0.64 0.25 27 / 22%);
+  }
+
+  .btn-red:hover {
+    background: oklch(0.58 0.25 27);
+  }
+
+  .btn-wire {
+    border-color: var(--border);
+    background: transparent;
+    color: var(--foreground);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .btn-wire:hover {
+    border-color: var(--primary);
+    background: oklch(0.64 0.25 27 / 10%);
+    color: var(--foreground);
+  }
+
+  .badge-red {
+    border-radius: 0;
+    border-color: oklch(0.64 0.25 27 / 38%);
+    background: oklch(0.64 0.25 27 / 14%);
+    color: var(--primary);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .section-kicker {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--primary);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .section-kicker svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .mega-title,
+  .section-title {
+    margin: 0;
+    color: var(--foreground);
+    font-weight: 950;
+    letter-spacing: 0;
+    line-height: 0.82;
+    text-transform: uppercase;
+  }
+
+  .mega-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.08em;
+    font-size: clamp(5rem, 14vw, 11.25rem);
+  }
+
+  .section-heading {
+    display: flex;
+    max-width: 82rem;
+    flex-direction: column;
+    gap: 1.35rem;
+  }
+
+  .section-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.24em;
+    font-size: clamp(3.8rem, 9vw, 8.25rem);
+  }
+
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1px oklch(1 0 0 / 36%);
+    text-stroke: 1px oklch(1 0 0 / 36%);
+  }
+
+  .section-heading p {
+    max-width: 50rem;
+    color: var(--muted-foreground);
+    font-size: clamp(1rem, 1.7vw, 1.25rem);
+    line-height: 1.7;
+  }
+
   .surface-hero {
     background:
-      radial-gradient(circle at 76% 42%, oklch(0.29 0.14 204 / 18%), transparent 18rem),
-      linear-gradient(180deg, oklch(0.055 0.006 248), oklch(0.035 0.004 248));
+      radial-gradient(circle at 76% 42%, oklch(0.34 0.16 27 / 12%), transparent 18rem),
+      linear-gradient(180deg, oklch(0.028 0.003 250), oklch(0.016 0.002 250));
   }
 
   .surface-section {
     background:
-      radial-gradient(circle at 12% 24%, oklch(0.2 0.05 205 / 14%), transparent 20rem),
-      linear-gradient(180deg, oklch(0.045 0.005 248), oklch(0.03 0.004 248));
+      linear-gradient(180deg, oklch(0.02 0.002 250), oklch(0.014 0.001 250));
   }
 
   .surface-section-alt {
     background:
-      radial-gradient(circle at 86% 8%, oklch(0.22 0.07 155 / 14%), transparent 22rem),
-      linear-gradient(180deg, oklch(0.075 0.007 248), oklch(0.045 0.005 248));
+      linear-gradient(180deg, oklch(0.032 0.003 250), oklch(0.018 0.002 250));
   }
 
   .grid-field {
@@ -167,36 +320,36 @@
     mask-image: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
   }
 
-  .interactive-card {
+  .column-card {
     position: relative;
-    transform-style: preserve-3d;
     will-change: transform;
+    transition:
+      border-color 220ms ease,
+      background-color 220ms ease,
+      box-shadow 220ms ease;
   }
 
-  .interactive-card::before {
+  .column-card::before {
     content: "";
     position: absolute;
-    inset: 0;
-    z-index: 0;
-    border-radius: inherit;
-    background:
-      radial-gradient(
-        260px circle at var(--spotlight-x, 50%) var(--spotlight-y, 0%),
-        oklch(0.78 0.18 205 / 14%),
-        transparent 42%
-      );
-    opacity: 0;
-    transition: opacity 220ms ease;
+    inset: 0 auto 0 0;
+    z-index: 2;
+    width: 4px;
+    background: var(--primary);
+    box-shadow: 0 0 28px oklch(0.64 0.25 27 / 45%);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 260ms ease;
     pointer-events: none;
   }
 
-  .interactive-card:hover::before {
-    opacity: 1;
+  .column-card:hover {
+    background: oklch(0.075 0.006 250);
+    box-shadow: 0 22px 60px oklch(0 0 0 / 38%);
   }
 
-  .interactive-card > * {
-    position: relative;
-    z-index: 1;
+  .column-card:hover::before {
+    transform: scaleY(1);
   }
 
   .site-cursor {
@@ -244,24 +397,24 @@
     .site-cursor-ring {
       width: 34px;
       height: 34px;
-      border: 1px solid oklch(0.78 0.18 205 / 55%);
+      border: 1px solid oklch(0.64 0.25 27 / 58%);
       box-shadow:
-        0 0 24px oklch(0.78 0.18 205 / 22%),
-        inset 0 0 18px oklch(0.78 0.18 205 / 10%);
+        0 0 24px oklch(0.64 0.25 27 / 24%),
+        inset 0 0 18px oklch(0.64 0.25 27 / 10%);
     }
 
     .site-cursor-dot {
       width: 5px;
       height: 5px;
-      background: oklch(0.78 0.18 205);
-      box-shadow: 0 0 18px oklch(0.78 0.18 205 / 70%);
+      background: var(--primary);
+      box-shadow: 0 0 18px oklch(0.64 0.25 27 / 70%);
     }
 
     .site-cursor.is-hovering .site-cursor-ring {
       width: 52px;
       height: 52px;
-      border-color: oklch(0.78 0.18 205 / 80%);
-      background: oklch(0.78 0.18 205 / 8%);
+      border-color: oklch(0.64 0.25 27 / 80%);
+      background: oklch(0.64 0.25 27 / 8%);
     }
 
     .site-cursor.is-hovering .site-cursor-dot {
@@ -269,53 +422,13 @@
     }
   }
 
-  .spline-orbit,
-  .spline-node {
-    position: absolute;
-    pointer-events: none;
-  }
+  @media (max-width: 640px) {
+    .mega-title {
+      font-size: clamp(4.2rem, 24vw, 6.5rem);
+    }
 
-  .spline-orbit {
-    border: 1px solid oklch(0.78 0.18 205 / 22%);
-    border-radius: 999px;
-    box-shadow: inset 0 0 28px oklch(0.78 0.18 205 / 8%);
-  }
-
-  .spline-orbit-one {
-    width: 280px;
-    height: 150px;
-    right: -74px;
-    top: 74px;
-    transform: rotate(-18deg);
-  }
-
-  .spline-orbit-two {
-    width: 220px;
-    height: 220px;
-    right: 64px;
-    bottom: 58px;
-    transform: rotate(24deg);
-  }
-
-  .spline-node {
-    border-radius: 999px;
-    background: oklch(0.78 0.18 205);
-    box-shadow:
-      0 0 22px oklch(0.78 0.18 205 / 65%),
-      0 0 80px oklch(0.78 0.18 205 / 18%);
-  }
-
-  .spline-node-one {
-    width: 12px;
-    height: 12px;
-    right: 88px;
-    top: 118px;
-  }
-
-  .spline-node-two {
-    width: 18px;
-    height: 18px;
-    right: 42px;
-    bottom: 108px;
+    .section-title {
+      font-size: clamp(3.2rem, 18vw, 5rem);
+    }
   }
 }

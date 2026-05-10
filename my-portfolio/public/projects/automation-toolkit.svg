@@ -9,13 +9,13 @@
   <text x="178" y="220" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Automation</text>
   <text x="178" y="266" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Toolkit</text>
   <path d="M180 332H382M180 378H344M180 424H398M180 470H312" stroke="#3f3f46" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="396" cy="492" r="42" fill="#22d3ee"/>
-  <path d="M374 492H418M396 470V514" stroke="#071012" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="396" cy="492" r="42" fill="#ff1f2d"/>
+  <path d="M374 492H418M396 470V514" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
   <text x="548" y="205" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Task queue</text>
   <path d="M742 200H1004" stroke="#27272a" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="548" cy="364" r="18" fill="#22d3ee"/>
-  <circle cx="548" cy="436" r="18" fill="#22d3ee" fill-opacity="0.55"/>
-  <circle cx="548" cy="508" r="18" fill="#22d3ee" fill-opacity="0.28"/>
+  <circle cx="548" cy="364" r="18" fill="#ff1f2d"/>
+  <circle cx="548" cy="436" r="18" fill="#ff1f2d" fill-opacity="0.55"/>
+  <circle cx="548" cy="508" r="18" fill="#ff1f2d" fill-opacity="0.28"/>
   <path d="M590 364H980M590 436H892M590 508H942" stroke="#3f3f46" stroke-width="12" stroke-linecap="round"/>
   <path d="M548 382V418M548 454V490" stroke="#27272a" stroke-width="6" stroke-linecap="round"/>
 </svg>

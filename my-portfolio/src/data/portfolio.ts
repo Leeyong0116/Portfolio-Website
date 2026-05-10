@@ -18,22 +18,32 @@ export type Project = {
   imageAlt: string
 }
 
+export type Experience = {
+  period: string
+  role: string
+  company: string
+  summary: string
+  stack: string[]
+}
+
 // Edit this file with your real name, bio, skills, projects, links, and outcomes.
 export const profile = {
-  name: "Your Name",
-  role: "Web Developer / Technical Partner",
-  tagline: "Build fast. Ship clean.",
+  name: "Lee Cheng Yong",
+  initials: "LCY",
+  role: "Web Developer",
+  tagline: "Build web systems.",
   intro:
-    "I build sharp, responsive web experiences across content, commerce, and product interfaces, with a focus on clean structure and practical delivery.",
-  location: "Your location / Remote",
-  email: "hello@example.com",
-  availability: "Available for selected projects",
+    "I build practical web experiences for business sites, commerce pages, and front-end interfaces, with a focus on clean delivery, maintainable structure, and client-ready execution.",
+  location: "Malaysia / Remote",
+  linkedinUrl: "https://www.linkedin.com/in/lee-cheng-yong-793620244/",
+  availability: "Open to selected web projects",
 }
 
 export const navItems = [
   { label: "Bio", href: "#bio" },
-  { label: "Stack", href: "#stack" },
   { label: "Projects", href: "#projects" },
+  { label: "Experience", href: "#experience" },
+  { label: "Stack", href: "#stack" },
   { label: "Contact", href: "#contact" },
 ]
 
@@ -107,7 +117,7 @@ export const projects: Project[] = [
     summary:
       "A focused storefront experience built around clear product discovery, fast content updates, and a cleaner path from browsing to checkout.",
     stack: ["WordPress", "WooCommerce", "Elementor", "CSS"],
-    outcome: "Launch metric",
+    outcome: "Storefront-ready pages",
     href: "#contact",
     image: "/projects/commerce-landing.svg",
     imageAlt: "Dark commerce landing page preview",
@@ -118,7 +128,7 @@ export const projects: Project[] = [
     summary:
       "A polished interface system for presenting services, selected work, and technical credibility through reusable React components.",
     stack: ["React", "TypeScript", "CSS", "JavaScript"],
-    outcome: "Engagement metric",
+    outcome: "Reusable UI system",
     href: "#contact",
     image: "/projects/react-portfolio.svg",
     imageAlt: "Dark React portfolio interface preview",
@@ -137,7 +147,34 @@ export const projects: Project[] = [
 ]
 
 export const bioHighlights = [
-  "Client-ready websites shaped around speed, clarity, and maintainable content systems.",
-  "Commerce and marketing pages designed for scanning, confidence, and action.",
-  "Practical tooling mindset for automation, structure, and cleaner development handoffs.",
+  "Web developer profile shaped around business websites, content structure, and clean implementation.",
+  "Comfortable with WordPress, Elementor, WooCommerce, React, JavaScript, and responsive interface work.",
+  "Practical delivery mindset for client-facing pages, maintainable sections, and smoother handoffs.",
+]
+
+export const experience: Experience[] = [
+  {
+    period: "Current role",
+    role: "Web Developer",
+    company: "Imagint",
+    summary:
+      "Working on web-based solutions for business sites, e-commerce experiences, and custom digital systems.",
+    stack: ["WordPress", "Elementor", "WooCommerce", "JavaScript"],
+  },
+  {
+    period: "Project focus",
+    role: "Frontend & CMS Development",
+    company: "Web Design / Custom Systems",
+    summary:
+      "Building responsive layouts, content-managed pages, and practical interfaces that are easy to scan and maintain.",
+    stack: ["React", "CSS", "HTML", "TypeScript"],
+  },
+  {
+    period: "Technical base",
+    role: "Programming & Workflow",
+    company: "Automation / Tooling",
+    summary:
+      "Using programming fundamentals to organize repeated steps, structure data, and support cleaner development workflows.",
+    stack: ["Python", "TypeScript", "HTML"],
+  },
 ]
