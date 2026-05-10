@@ -1,0 +1,21 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#050505"/>
+  <path d="M80 92H1120M80 668H1120M80 92V668M1120 92V668" stroke="#2c2c2c" stroke-width="2"/>
+  <path d="M80 204H1120" stroke="#252525" stroke-width="2"/>
+  <text x="128" y="158" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700">React Portfolio Experience</text>
+  <rect x="866" y="126" width="154" height="42" rx="12" fill="#22d3ee"/>
+  <text x="902" y="153" fill="#071012" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Contact</text>
+  <rect x="128" y="256" width="404" height="320" rx="22" fill="#0f0f0f" stroke="#303030"/>
+  <text x="166" y="340" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Build fast.</text>
+  <text x="166" y="402" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700">Ship clean.</text>
+  <path d="M166 462H442" stroke="#3f3f46" stroke-width="12" stroke-linecap="round"/>
+  <path d="M166 504H350" stroke="#27272a" stroke-width="12" stroke-linecap="round"/>
+  <rect x="596" y="256" width="476" height="320" rx="22" fill="#101010" stroke="#303030"/>
+  <rect x="636" y="304" width="396" height="58" rx="14" fill="#171717"/>
+  <rect x="636" y="394" width="170" height="126" rx="16" fill="#161616" stroke="#303030"/>
+  <rect x="834" y="394" width="198" height="126" rx="16" fill="#161616" stroke="#303030"/>
+  <circle cx="724" cy="456" r="36" fill="#22d3ee" fill-opacity="0.18"/>
+  <path d="M690 456C712 424 738 424 760 456C738 488 712 488 690 456Z" stroke="#22d3ee" stroke-width="8"/>
+  <path d="M874 438H992M874 472H956" stroke="#a1a1aa" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="596" cy="256" r="96" fill="#22d3ee" fill-opacity="0.08"/>
+</svg>

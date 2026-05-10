@@ -1,0 +1,27 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#050505"/>
+  <path d="M0 120H1200M0 240H1200M0 360H1200M0 480H1200M0 600H1200M150 0V760M300 0V760M450 0V760M600 0V760M750 0V760M900 0V760M1050 0V760" stroke="#1f1f1f" stroke-width="1"/>
+  <rect x="72" y="72" width="1056" height="616" rx="28" fill="#0d0d0d" stroke="#2c2c2c"/>
+  <rect x="112" y="112" width="980" height="64" rx="16" fill="#151515" stroke="#2f2f2f"/>
+  <circle cx="142" cy="144" r="8" fill="#22d3ee"/>
+  <circle cx="170" cy="144" r="8" fill="#3f3f46"/>
+  <circle cx="198" cy="144" r="8" fill="#3f3f46"/>
+  <rect x="828" y="132" width="78" height="24" rx="12" fill="#252525"/>
+  <rect x="922" y="132" width="78" height="24" rx="12" fill="#252525"/>
+  <rect x="1016" y="132" width="48" height="24" rx="12" fill="#22d3ee"/>
+  <text x="112" y="272" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700">Commerce</text>
+  <text x="112" y="346" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700">Landing System</text>
+  <text x="116" y="404" fill="#a1a1aa" font-family="Arial, Helvetica, sans-serif" font-size="24">Product discovery, clear offers, and checkout-ready content.</text>
+  <rect x="116" y="456" width="188" height="54" rx="14" fill="#22d3ee"/>
+  <text x="154" y="490" fill="#071012" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Shop Now</text>
+  <rect x="348" y="456" width="156" height="54" rx="14" fill="#111111" stroke="#333333"/>
+  <text x="382" y="490" fill="#fafafa" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Catalog</text>
+  <rect x="646" y="236" width="352" height="352" rx="24" fill="#111111" stroke="#333333"/>
+  <rect x="684" y="274" width="276" height="176" rx="20" fill="#181818"/>
+  <rect x="714" y="304" width="94" height="116" rx="14" fill="#242424"/>
+  <rect x="836" y="304" width="94" height="116" rx="14" fill="#2c2c2c"/>
+  <path d="M704 500H940" stroke="#3f3f46" stroke-width="10" stroke-linecap="round"/>
+  <path d="M704 536H870" stroke="#27272a" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="998" cy="236" r="70" fill="#22d3ee" fill-opacity="0.14"/>
+  <circle cx="998" cy="236" r="38" fill="#22d3ee"/>
+</svg>
