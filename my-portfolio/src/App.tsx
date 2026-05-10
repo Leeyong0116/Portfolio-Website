@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import type { ReactNode } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import {
   ArrowUpRight,
   Code2,
@@ -62,8 +64,19 @@ const skillTabs: { value: "all" | SkillCategory; label: string }[] = [
 ]
 
 function App() {
+  const rootRef = useRef<HTMLElement | null>(null)
+
+  usePortfolioMotion(rootRef)
+
   return (
-    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+    <main
+      ref={rootRef}
+      className="min-h-screen overflow-hidden bg-background text-foreground"
+    >
+      <div className="site-cursor" aria-hidden="true">
+        <span className="site-cursor-ring" />
+        <span className="site-cursor-dot" />
+      </div>
       <Header />
       <Hero />
       <Bio />
@@ -78,7 +91,7 @@ function App() {
 function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/85 backdrop-blur-xl">
-      <Container className="flex h-16 items-center justify-between gap-6">
+      <Container className="app-header flex h-16 items-center justify-between gap-6">
         <a href="#" className="flex items-center gap-3" aria-label="Home">
           <span className="flex size-9 items-center justify-center rounded-lg border border-border bg-card text-sm font-semibold">
             YN
@@ -148,10 +161,10 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative border-b border-border/70">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:72px_72px] opacity-20" />
+    <section className="surface-hero relative border-b border-border/70">
+      <div className="grid-field absolute inset-0" />
       <Container className="relative grid min-h-[calc(100vh-4rem)] items-center gap-12 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
-        <div className="flex flex-col gap-8">
+        <div className="hero-copy flex flex-col gap-8">
           <div className="flex max-w-5xl flex-col gap-6">
             <h1 className="text-5xl font-semibold leading-[0.98] text-balance md:text-7xl lg:text-8xl">
               {profile.tagline}
@@ -188,7 +201,13 @@ function Hero() {
           </div>
         </div>
 
-        <Card className="overflow-hidden border-border bg-card/80 shadow-2xl shadow-black/30">
+        <Card className="hero-panel interactive-card overflow-hidden border-border bg-card/80 shadow-2xl shadow-black/30">
+          <div className="pointer-events-none absolute inset-0 opacity-80">
+            <div className="spline-orbit spline-orbit-one" />
+            <div className="spline-orbit spline-orbit-two" />
+            <div className="spline-node spline-node-one" />
+            <div className="spline-node spline-node-two" />
+          </div>
           <CardHeader className="gap-4">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-2">
@@ -223,7 +242,8 @@ function Hero() {
               <a
                 key={project.title}
                 href={project.href}
-                className="group rounded-lg border border-border bg-background/65 p-4 transition hover:border-primary/40 hover:bg-muted/40"
+                className="group relative rounded-lg border border-border bg-background/65 p-4 transition hover:border-primary/40 hover:bg-muted/40"
+                data-animate="item"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-3">
@@ -252,16 +272,19 @@ function Hero() {
 
 function Bio() {
   return (
-    <section id="bio" className="border-b border-border/70 py-20 md:py-28">
+    <section id="bio" className="surface-section border-b border-border/70 py-20 md:py-28" data-animate="section">
       <Container className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr]">
         <SectionLabel icon={Sparkles} title="Bio" />
         <div className="flex flex-col gap-8">
-          <p className="max-w-4xl text-3xl font-medium leading-tight text-balance md:text-5xl">
+          <p
+            className="max-w-4xl text-3xl font-medium leading-tight text-balance md:text-5xl"
+            data-animate="copy"
+          >
             {profile.intro}
           </p>
           <div className="grid gap-4 md:grid-cols-3">
             {bioHighlights.map((item) => (
-              <Card key={item} className="border-border bg-card">
+              <Card key={item} className="interactive-card border-border bg-card" data-animate="item">
                 <CardContent className="p-5 text-sm leading-6 text-muted-foreground">
                   {item}
                 </CardContent>
@@ -291,15 +314,21 @@ function TechStack() {
   )
 
   return (
-    <section id="stack" className="border-b border-border/70 py-20 md:py-28">
+    <section id="stack" className="surface-section-alt border-b border-border/70 py-20 md:py-28" data-animate="section">
       <Container className="flex flex-col gap-10">
         <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
           <SectionLabel icon={Layers3} title="Tech Stack" />
           <div className="flex max-w-3xl flex-col gap-4">
-            <h2 className="text-4xl font-semibold leading-tight md:text-6xl">
+            <h2
+              className="text-4xl font-semibold leading-tight md:text-6xl"
+              data-animate="copy"
+            >
               Skills arranged for quick scanning.
             </h2>
-            <p className="text-lg leading-8 text-muted-foreground">
+            <p
+              className="text-lg leading-8 text-muted-foreground"
+              data-animate="copy"
+            >
               A balanced mix of CMS, commerce, frontend, and programming tools
               for building practical web experiences.
             </p>
@@ -320,7 +349,8 @@ function TechStack() {
                 {groupedSkills[tab.value].map((skill) => (
                   <Card
                     key={skill.name}
-                    className="group border-border bg-card transition hover:border-primary/40"
+                    className="interactive-card group border-border bg-card transition hover:border-primary/40"
+                    data-animate="item"
                   >
                     <CardHeader>
                       <CardTitle className="flex items-center gap-3 text-xl">
@@ -364,15 +394,21 @@ function ProjectShowcase() {
   }, [api])
 
   return (
-    <section id="projects" className="border-b border-border/70 py-20 md:py-28">
+    <section id="projects" className="surface-section border-b border-border/70 py-20 md:py-28" data-animate="section">
       <Container className="flex flex-col gap-10">
         <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
           <SectionLabel icon={Code2} title="Projects" />
           <div className="flex max-w-4xl flex-col gap-4">
-            <h2 className="text-4xl font-semibold leading-tight md:text-6xl">
+            <h2
+              className="text-4xl font-semibold leading-tight md:text-6xl"
+              data-animate="copy"
+            >
               Case study slots with a real carousel.
             </h2>
-            <p className="text-lg leading-8 text-muted-foreground">
+            <p
+              className="text-lg leading-8 text-muted-foreground"
+              data-animate="copy"
+            >
               Use this section for stores, websites, apps, dashboards,
               automations, and case studies that show the kind of work you want.
             </p>
@@ -382,8 +418,12 @@ function ProjectShowcase() {
         <Carousel setApi={setApi} opts={{ align: "start", loop: true }}>
           <CarouselContent>
             {projects.map((project, index) => (
-              <CarouselItem key={project.title} className="md:basis-1/2">
-                <Card className="min-h-[560px] border-border bg-card">
+              <CarouselItem
+                key={project.title}
+                className="md:basis-1/2"
+                data-animate="item"
+              >
+                <Card className="interactive-card min-h-[560px] border-border bg-card">
                   <div className="px-4 pt-4">
                     <div className="aspect-[16/9] overflow-hidden rounded-lg border border-border bg-background">
                       <img
@@ -456,15 +496,21 @@ function ProjectShowcase() {
 
 function Contact() {
   return (
-    <section id="contact" className="py-20 md:py-28">
+    <section id="contact" className="surface-section-alt py-20 md:py-28" data-animate="section">
       <Container>
-        <Card className="border-border bg-card">
+        <Card className="interactive-card border-border bg-card">
           <CardContent className="grid gap-10 p-6 md:p-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="flex flex-col gap-5">
-              <h2 className="text-4xl font-semibold leading-tight md:text-6xl">
+              <h2
+                className="text-4xl font-semibold leading-tight md:text-6xl"
+                data-animate="copy"
+              >
                 Ready for your next project.
               </h2>
-              <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
+              <p
+                className="max-w-2xl text-lg leading-8 text-muted-foreground"
+                data-animate="copy"
+              >
                 For collaborations, builds, redesigns, and technical support,
                 start with a short note about the goal and timeline.
               </p>
@@ -542,3 +588,183 @@ function Container({
 }
 
 export default App
+
+function usePortfolioMotion(rootRef: React.RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const root = rootRef.current
+    if (!root) return
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches
+
+    if (reduceMotion) {
+      gsap.set(root.querySelectorAll("[data-animate], .hero-copy > *, .hero-panel"), {
+        clearProps: "all",
+      })
+      return
+    }
+
+    const cleanups: Array<() => void> = []
+
+    const ctx = gsap.context(() => {
+      const cursor = root.querySelector<HTMLElement>(".site-cursor")
+      const finePointer = window.matchMedia("(pointer: fine)")
+
+      if (cursor && finePointer.matches) {
+        gsap.set(cursor, { xPercent: -50, yPercent: -50 })
+
+        const xTo = gsap.quickTo(cursor, "x", {
+          duration: 0.16,
+          ease: "power3.out",
+        })
+        const yTo = gsap.quickTo(cursor, "y", {
+          duration: 0.16,
+          ease: "power3.out",
+        })
+        const interactiveSelector =
+          "a, button, input, textarea, select, [role='button'], [tabindex]:not([tabindex='-1']), .interactive-card"
+
+        const handlePointerMove = (event: PointerEvent) => {
+          const target = event.target instanceof Element ? event.target : null
+
+          root.classList.add("has-site-cursor")
+          cursor.classList.add("is-visible")
+          cursor.classList.toggle(
+            "is-hovering",
+            Boolean(target?.closest(interactiveSelector))
+          )
+          xTo(event.clientX)
+          yTo(event.clientY)
+        }
+
+        const handlePointerLeave = () => {
+          cursor.classList.remove("is-visible", "is-hovering")
+        }
+
+        root.addEventListener("pointermove", handlePointerMove)
+        root.addEventListener("pointerleave", handlePointerLeave)
+        cleanups.push(() => {
+          root.classList.remove("has-site-cursor")
+          root.removeEventListener("pointermove", handlePointerMove)
+          root.removeEventListener("pointerleave", handlePointerLeave)
+        })
+      }
+
+      gsap.from(".app-header", {
+        y: -18,
+        autoAlpha: 0,
+        duration: 0.7,
+        ease: "power3.out",
+      })
+
+      gsap.from(".hero-copy > *", {
+        y: 42,
+        autoAlpha: 0,
+        duration: 0.95,
+        ease: "power3.out",
+        stagger: 0.12,
+      })
+
+      gsap.from(".hero-panel", {
+        y: 36,
+        rotateX: -8,
+        rotateY: 10,
+        autoAlpha: 0,
+        transformPerspective: 1000,
+        duration: 1,
+        delay: 0.2,
+        ease: "power3.out",
+      })
+
+      gsap.to(".spline-orbit-one", {
+        rotate: 360,
+        duration: 18,
+        repeat: -1,
+        ease: "none",
+      })
+
+      gsap.to(".spline-orbit-two", {
+        rotate: -360,
+        duration: 24,
+        repeat: -1,
+        ease: "none",
+      })
+
+      gsap.to(".spline-node", {
+        y: -14,
+        scale: 1.08,
+        duration: 2.2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.4,
+      })
+
+      gsap.utils.toArray<HTMLElement>("[data-animate='section']").forEach((section) => {
+        const items = section.querySelectorAll(
+          "[data-animate='item'], [data-animate='copy']"
+        )
+
+        gsap.from(items, {
+          y: 34,
+          autoAlpha: 0,
+          duration: 0.75,
+          ease: "power3.out",
+          stagger: 0.06,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 72%",
+            once: true,
+          },
+        })
+      })
+
+      gsap.utils.toArray<HTMLElement>(".interactive-card").forEach((card) => {
+        const xTo = gsap.quickTo(card, "rotationY", {
+          duration: 0.45,
+          ease: "power3.out",
+        })
+        const yTo = gsap.quickTo(card, "rotationX", {
+          duration: 0.45,
+          ease: "power3.out",
+        })
+        const liftTo = gsap.quickTo(card, "y", {
+          duration: 0.35,
+          ease: "power3.out",
+        })
+
+        const handleMouseMove = (event: MouseEvent) => {
+          const rect = card.getBoundingClientRect()
+          const relX = (event.clientX - rect.left) / rect.width - 0.5
+          const relY = (event.clientY - rect.top) / rect.height - 0.5
+
+          card.style.setProperty("--spotlight-x", `${event.clientX - rect.left}px`)
+          card.style.setProperty("--spotlight-y", `${event.clientY - rect.top}px`)
+          xTo(relX * 7)
+          yTo(relY * -7)
+          liftTo(-4)
+        }
+
+        const handleMouseLeave = () => {
+          xTo(0)
+          yTo(0)
+          liftTo(0)
+        }
+
+        card.addEventListener("mousemove", handleMouseMove)
+        card.addEventListener("mouseleave", handleMouseLeave)
+        cleanups.push(() => {
+          card.removeEventListener("mousemove", handleMouseMove)
+          card.removeEventListener("mouseleave", handleMouseLeave)
+        })
+      })
+    }, root)
+
+    return () => {
+      cleanups.forEach((cleanup) => cleanup())
+      ctx.revert()
+    }
+  }, [rootRef])
+}
